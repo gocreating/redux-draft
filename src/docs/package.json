@@ -14,7 +14,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-standard": "^3.0.1",
-    "react-scripts": "1.0.14",
+    "react-scripts": "0.9.5",
     "react-snapshot": "^1.2.0"
   },
   "scripts": {
