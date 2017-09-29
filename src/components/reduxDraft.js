@@ -6,7 +6,7 @@ import * as actionCreators from '../actions/index';
 export default (config) => (WrappedComponent) => {
   class ReduxDraft extends Component {
     componentDidMount() {
-      this.props.init();
+      this.props.init(config);
     }
 
     render() {
@@ -23,6 +23,7 @@ export default (config) => (WrappedComponent) => {
 
     return {
       name: currentDraft.name,
+      config: currentDraft.config,
       editorState: currentDraft.editorState,
     };
   };

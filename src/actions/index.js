@@ -3,10 +3,11 @@ import {
   UPDATE_EDITOR_STATE,
 } from '../constants/ActionTypes';
 
-export let init = (editorName) => {
+export let init = (editorName, config) => {
   return {
     type: INIT,
     editorName,
+    config,
   };
 };
 

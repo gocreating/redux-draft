@@ -6,14 +6,15 @@ import {
   UPDATE_EDITOR_STATE,
 } from '../constants/ActionTypes';
 
-let initialEditorState = {
-  editorState: EditorState.createEmpty(),
-};
+let initialEditorState = {};
 let editorReducer = (state = initialEditorState, action) => {
   switch (action.type) {
     case INIT: {
+      let { config } = action;
+
       return {
         name: action.editorName,
+        config,
         editorState: action.editorState || EditorState.createEmpty(),
       };
     }
