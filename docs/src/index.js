@@ -1,8 +1,8 @@
 import React from 'react';
-import { render } from 'react-snapshot';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
-import { reducer as draftReducer } from '../../../lib/index';
+import { reducer as draftReducer } from '../../lib';
 import App from './App';
 
 let rootReducer = combineReducers({
@@ -10,7 +10,7 @@ let rootReducer = combineReducers({
 });
 let store = createStore(rootReducer);
 
-render((
+ReactDOM.render((
   <Provider store={store}>
     <App />
   </Provider>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Editor } from 'draft-js';
-import { reduxDraft } from '../../../lib/index';
+import { reduxDraft } from '../../lib';
 import 'draft-js/dist/Draft.css';
 import './PostEditor.css';
 

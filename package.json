@@ -25,6 +25,12 @@
     "url": "https://github.com/gocreating/redux-draft/issues"
   },
   "homepage": "https://github.com/gocreating/redux-draft#readme",
+  "peerDependencies": {
+    "draft-js": "^0.10.2",
+    "react": "^15.0.0-0 || ^16.0.0-0",
+    "react-redux": "^4.3.0 || ^5.0.0",
+    "redux": "^3.0.0"
+  },
   "devDependencies": {
     "babel-eslint": "^7.2.2",
     "babel-preset-es2015": "^6.24.1",
@@ -44,15 +50,13 @@
     "gulp-notify": "^3.0.0",
     "gulp-sourcemaps": "^2.6.0",
     "immutable": "^3.8.1",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "rimraf": "^2.6.1"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
-    "prop-types": "^15.6.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "redraft": "^0.8.0"
+    "prop-types": "^15.6.0"
   }
 }
