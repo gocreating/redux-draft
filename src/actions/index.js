@@ -1,5 +1,6 @@
 import {
   INIT,
+  SET_REF,
   UPDATE_EDITOR_STATE,
 } from '../constants/ActionTypes';
 
@@ -8,6 +9,14 @@ export let init = (editorName, config) => {
     type: INIT,
     editorName,
     config,
+  };
+};
+
+export let setRef = (editorName, editorInstance) => {
+  return {
+    type: SET_REF,
+    editorName,
+    editorInstance,
   };
 };
 

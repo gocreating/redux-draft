@@ -11,6 +11,7 @@ export default (config) => (WrappedComponent) => {
 
     render() {
       let {
+        _instance,
         name,
         config,
         editorState,
