@@ -1,3 +1,22 @@
-.post-editor {
+.post-editor .editor {
   border: 1px solid black;
+  padding: 20px;
+}
+.post-editor.controls {
+ border-bottom: 1px solid #ddd;
+ padding: 0 0 10px 0;
+ margin-bottom: 10px;
+}
+.post-editor .controls .control {
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+.post-editor .controls .control:hover {
+  outline: 1px dashed #ddd;
+}
+.post-editor .controls .control.active {
+  outline: 1px solid #ddd;
+  background-color: #ddd;
 }

@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://gocreating.github.io/redux-draft/",
   "dependencies": {
+    "classnames": "^2.2.5",
     "gh-pages": "^1.0.0",
     "redux": "^3.7.2"
   },
