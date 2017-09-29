@@ -10,10 +10,20 @@ export default (config) => (WrappedComponent) => {
     }
 
     render() {
-      let { name } = this.props;
+      let {
+        name,
+        config,
+        editorState,
+        ...rest
+      } = this.props;
 
       return name !== undefined ? (
-        <WrappedComponent {...this.props} />
+        <WrappedComponent
+          name={name}
+          config={config}
+          editorState={editorState}
+          {...rest}
+        />
       ) : null;
     }
   }
@@ -21,11 +31,7 @@ export default (config) => (WrappedComponent) => {
   let mapStateToProps = (state) => {
     let currentDraft = state.draft[config.name] || {};
 
-    return {
-      name: currentDraft.name,
-      config: currentDraft.config,
-      editorState: currentDraft.editorState,
-    };
+    return currentDraft;
   };
   let mapDispatchToProps = (dispatch) => {
     let bindDraft = (actionCreator) => actionCreator.bind(null, config.name);
