@@ -15,6 +15,7 @@ export default (config) => (WrappedComponent) => {
         name,
         config,
         editorState,
+        customStyleMap,
         ...rest
       } = this.props;
 
@@ -24,6 +25,7 @@ export default (config) => (WrappedComponent) => {
           name={name}
           config={config}
           editorState={editorState}
+          customStyleMap={customStyleMap}
           {...rest}
         />
       ) : null;

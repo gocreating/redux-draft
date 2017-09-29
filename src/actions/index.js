@@ -2,6 +2,7 @@ import {
   INIT,
   SET_REF,
   UPDATE_EDITOR_STATE,
+  TOGGLE_STYLE,
 } from '../constants/ActionTypes';
 
 export let init = (editorName, config) => {
@@ -25,5 +26,13 @@ export let updateEditorState = (editorName, editorState) => {
     type: UPDATE_EDITOR_STATE,
     editorName,
     editorState,
+  };
+};
+
+export let toggleStyle = (editorName, styleName) => {
+  return {
+    type: TOGGLE_STYLE,
+    editorName,
+    styleName,
   };
 };
