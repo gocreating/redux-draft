@@ -20,6 +20,7 @@ export default (config) => (WrappedComponent) => {
 
       return name !== undefined ? (
         <WrappedComponent
+          focus={(_instance || {}).focus}
           name={name}
           config={config}
           editorState={editorState}
