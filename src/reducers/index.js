@@ -26,9 +26,13 @@ let editorReducer = (state = initialEditorState, action) => {
   switch (action.type) {
     case INIT: {
       let { config } = action;
+      let {
+        customStyleMap,
+        renderMap,
+      } = config;
       let styleNames = [
         ...Object.keys(DefaultDraftInlineStyle),
-        ...Object.keys(config.customStyleMap),
+        ...Object.keys(customStyleMap),
       ];
       let editorState = (
         action.editorState ||
@@ -48,6 +52,7 @@ let editorReducer = (state = initialEditorState, action) => {
           editorState,
           styleNames,
         }),
+        renderMap,
 
         // draft props
         editorState,

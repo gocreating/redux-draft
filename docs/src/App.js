@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PostEditor from './PostEditor';
+import PostPreview from './PostPreview';
 import PostRaw from './PostRaw';
 
 class App extends Component {
@@ -10,6 +11,8 @@ class App extends Component {
         <hr />
         <h2>Editor</h2>
         <PostEditor />
+        <h2>Preview</h2>
+        <PostPreview />
         <h2>Raw</h2>
         <PostRaw />
       </div>
