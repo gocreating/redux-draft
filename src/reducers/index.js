@@ -38,6 +38,7 @@ let editorReducer = (state = initialEditorState, action) => {
       return {
         // private redux-draft props
         _instance: null,
+        _initialized: true,
 
         // public redux-draft props
         name: action.editorName,
