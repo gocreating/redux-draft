@@ -32,7 +32,7 @@ let editorReducer = (state = initialEditorState, action) => {
       } = config;
       let styleNames = [
         ...Object.keys(DefaultDraftInlineStyle),
-        ...Object.keys(customStyleMap),
+        ...Object.keys(customStyleMap || []),
       ];
       let editorState = (
         action.editorState ||
