@@ -2,6 +2,7 @@ import {
   INIT,
   SET_REF,
   UPDATE_EDITOR_STATE,
+  TOGGLE_BLOCK,
   TOGGLE_STYLE,
 } from '../constants/ActionTypes';
 
@@ -26,6 +27,14 @@ export let updateEditorState = (editorName, editorState) => {
     type: UPDATE_EDITOR_STATE,
     editorName,
     editorState,
+  };
+};
+
+export let toggleBlock = (editorName, blockName) => {
+  return {
+    type: TOGGLE_BLOCK,
+    editorName,
+    blockName,
   };
 };
 
