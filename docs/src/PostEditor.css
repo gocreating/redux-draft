@@ -3,9 +3,9 @@
   padding: 20px;
 }
 .post-editor.controls {
- border-bottom: 1px solid #ddd;
- padding: 0 0 10px 0;
- margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding: 0 0 10px 0;
+  margin-bottom: 10px;
 }
 .post-editor .controls .control {
   display: inline-block;
