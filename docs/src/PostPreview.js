@@ -4,6 +4,10 @@ import redraft from 'redraft';
 import { reduxDraft } from '../../lib';
 import blogPost from './presets/blogPost';
 
+let addBreaklines = (children) => {
+  return children.map(child => [child, <br />]);
+};
+
 class PostPreview extends Component {
   renderWarning() {
     return (
@@ -40,6 +44,60 @@ class PostPreview extends Component {
           {children}
         </code>
       ),
+      unstyled: (children) => (
+        children.map(child => (
+          <p>
+            {child}
+          </p>
+        ))
+      ),
+      'header-one': (children) => children.map(child =>
+        <h1>{child}</h1>
+      ),
+      'header-two': (children) => children.map(child =>
+        <h2>{child}</h2>
+      ),
+      'header-three': (children) => children.map(child =>
+        <h3>{child}</h3>
+      ),
+      'header-four': (children) => children.map(child =>
+        <h4>{child}</h4>
+      ),
+      'header-five': (children) => children.map(child =>
+        <h5>{child}</h5>
+      ),
+      'header-six': (children) => children.map(child =>
+        <h6>{child}</h6>
+      ),
+      blockquote: (children, { keys }) => (
+        <blockquote key={keys[0]}>
+          {addBreaklines(children)}
+        </blockquote>
+      ),
+      'code-block': (children, { keys }) => (
+        <pre key={keys[0]}>
+          {addBreaklines(children)}
+        </pre>
+      ),
+      'unordered-list-item': (children, { depth, keys }) => (
+        <ul
+          key={keys.join('-')}
+          className={`ul-level-${depth}`}
+        >
+          {children.map((child, idx) => (
+            <li key={keys[idx]}>{child}</li>
+          ))}
+        </ul>
+      ),
+      'ordered-list-item': (children, { depth, keys }) => (
+        <ol
+          key={keys.join('-')}
+          className={`ol-level-${depth}`}
+        >
+          {children.map((child, idx) =>
+            <li key={keys[idx]}>{child}</li>)}
+        </ol>
+      ),
     };
   }
 
@@ -47,6 +105,7 @@ class PostPreview extends Component {
     let {
       editorState,
       customStyleMap,
+      blockNames,
       styleNames,
       renderMap,
     } = this.props;
@@ -81,8 +140,16 @@ class PostPreview extends Component {
         return map;
       }, {}
     );
+    let blockRenderer = blockNames.reduce(
+      (map, blockName) => {
+        map[blockName] = mergedRenderMap[blockName];
+        return map;
+      }, {}
+    );
+
     let renderers = {
       inline: inlineRenderer,
+      blocks: blockRenderer,
     };
     let rendered = redraft(rawContent, renderers);
 
