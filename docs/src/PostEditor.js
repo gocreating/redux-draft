@@ -3,6 +3,7 @@ import { Editor } from 'draft-js';
 import { reduxDraft } from '../../lib';
 import Controls from './Controls';
 import Control from './Control';
+import blogPost from './presets/blogPost';
 import 'draft-js/dist/Draft.css';
 import './PostEditor.css';
 
@@ -76,16 +77,4 @@ class PostEditor extends Component {
   }
 }
 
-export default reduxDraft({
-  name: 'BLOG_POST',
-  customStyleMap: {
-    COLOR_RED: {
-      color: 'red',
-    },
-    CUSTOM_CODE: {
-      backgroundColor: 'rgba(0, 0, 0, 0.05)',
-      fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-      padding: 2,
-    },
-  },
-})(PostEditor);
+export default reduxDraft(blogPost)(PostEditor);
