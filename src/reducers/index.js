@@ -10,9 +10,9 @@ import {
   TOGGLE_STYLE,
 } from '../constants/ActionTypes';
 
-let getActiveMap = ({ editorState, _styleNames }) => {
+let getActiveMap = ({ editorState, styleNames }) => {
   let currentStyleNames = editorState.getCurrentInlineStyle();
-  let activeMap = _styleNames
+  let activeMap = styleNames
     .reduce((map, styleName) => {
       map[styleName] = currentStyleNames.has(styleName);
       return map;
@@ -26,7 +26,7 @@ let editorReducer = (state = initialEditorState, action) => {
   switch (action.type) {
     case INIT: {
       let { config } = action;
-      let _styleNames = [
+      let styleNames = [
         ...Object.keys(DefaultDraftInlineStyle),
         ...Object.keys(config.customStyleMap),
       ];
@@ -38,14 +38,14 @@ let editorReducer = (state = initialEditorState, action) => {
       return {
         // private redux-draft props
         _instance: null,
-        _styleNames,
 
         // public redux-draft props
         name: action.editorName,
         config,
+        styleNames,
         activeMap: getActiveMap({
           editorState,
-          _styleNames,
+          styleNames,
         }),
 
         // draft props
@@ -62,7 +62,7 @@ let editorReducer = (state = initialEditorState, action) => {
     }
 
     case UPDATE_EDITOR_STATE: {
-      let { _styleNames } = state;
+      let { styleNames } = state;
       let { editorState } = action;
 
       return {
@@ -70,13 +70,13 @@ let editorReducer = (state = initialEditorState, action) => {
         editorState,
         activeMap: getActiveMap({
           editorState,
-          _styleNames,
+          styleNames,
         }),
       };
     }
 
     case TOGGLE_STYLE: {
-      let { _styleNames } = state;
+      let { styleNames } = state;
       let editorState = RichUtils.toggleInlineStyle(
         state.editorState,
         action.styleName
@@ -87,7 +87,7 @@ let editorReducer = (state = initialEditorState, action) => {
         editorState,
         activeMap: getActiveMap({
           editorState,
-          _styleNames,
+          styleNames,
         }),
       };
     }
