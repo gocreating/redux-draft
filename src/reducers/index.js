@@ -4,6 +4,8 @@ import {
   RichUtils,
   DefaultDraftBlockRenderMap,
   DefaultDraftInlineStyle,
+  CompositeDecorator,
+  Modifier,
 } from 'draft-js';
 import {
   INIT,
@@ -11,7 +13,11 @@ import {
   UPDATE_EDITOR_STATE,
   TOGGLE_BLOCK,
   TOGGLE_STYLE,
+  REMOVE_ENTITY,
+  APPLY_ENTITY,
+  INSERT_ENTITY,
 } from '../constants/ActionTypes';
+import isEntityActive from '../utils/isEntityActive';
 
 let getBlockRenderMap = (customBlockMap) => {
   let customBlockRenderMap = Map(Object
@@ -39,7 +45,7 @@ let getBlockRenderMap = (customBlockMap) => {
 };
 
 let getActiveMap = ({
-  editorState, blockNames, styleNames,
+  editorState, blockNames, styleNames, decoratorNames,
 }) => {
   let selectionState = editorState.getSelection();
   let currentBlockType = editorState
@@ -59,10 +65,16 @@ let getActiveMap = ({
       map[styleName] = currentStyleNames.has(styleName);
       return map;
     }, {});
+  let entityActiveMap = decoratorNames
+    .reduce((map, decoratorName) => {
+      map[decoratorName] = isEntityActive(editorState, decoratorName);
+      return map;
+    }, {});
 
   return {
     ...blockActiveMap,
     ...styleActiveMap,
+    ...entityActiveMap,
   };
 };
 
@@ -74,6 +86,7 @@ let editorReducer = (state = initialEditorState, action) => {
       let {
         customStyleMap,
         customBlockMap,
+        decoratorMap,
         renderMap,
       } = config;
       let defaultStyleNames = Object.keys(DefaultDraftInlineStyle);
@@ -98,7 +111,14 @@ let editorReducer = (state = initialEditorState, action) => {
       let blockNames = (
         blockRenderMap.keySeq().toArray()
       );
+      let decoratorNames = Object.keys(decoratorMap);
+      let decorators = (
+        decoratorNames.map(decoratorName => decoratorMap[decoratorName])
+      );
 
+      editorState = EditorState.set(editorState, {
+        decorator: new CompositeDecorator(decorators),
+      });
       return {
         // private redux-draft props
         _instance: null,
@@ -111,10 +131,13 @@ let editorReducer = (state = initialEditorState, action) => {
         styleNames,
         defaultBlockNames,
         blockNames,
+        decoratorNames,
+        decorators,
         activeMap: getActiveMap({
           editorState,
           blockNames,
           styleNames,
+          decoratorNames,
         }),
         renderMap,
 
@@ -134,7 +157,11 @@ let editorReducer = (state = initialEditorState, action) => {
     }
 
     case UPDATE_EDITOR_STATE: {
-      let { blockNames, styleNames } = state;
+      let {
+        blockNames,
+        styleNames,
+        decoratorNames,
+      } = state;
       let { editorState } = action;
 
       return {
@@ -144,12 +171,17 @@ let editorReducer = (state = initialEditorState, action) => {
           editorState,
           blockNames,
           styleNames,
+          decoratorNames,
         }),
       };
     }
 
     case TOGGLE_BLOCK: {
-      let { blockNames, styleNames } = state;
+      let {
+        blockNames,
+        styleNames,
+        decoratorNames,
+      } = state;
       let editorState = RichUtils.toggleBlockType(
         state.editorState,
         action.blockName
@@ -162,12 +194,17 @@ let editorReducer = (state = initialEditorState, action) => {
           editorState,
           blockNames,
           styleNames,
+          decoratorNames,
         }),
       };
     }
 
     case TOGGLE_STYLE: {
-      let { blockNames, styleNames } = state;
+      let {
+        blockNames,
+        styleNames,
+        decoratorNames,
+      } = state;
       let editorState = RichUtils.toggleInlineStyle(
         state.editorState,
         action.styleName
@@ -180,6 +217,135 @@ let editorReducer = (state = initialEditorState, action) => {
           editorState,
           blockNames,
           styleNames,
+          decoratorNames,
+        }),
+      };
+    }
+
+    case REMOVE_ENTITY: {
+      let {
+        editorState,
+        blockNames,
+        styleNames,
+        decoratorNames,
+      } = state;
+      let selectionState = editorState.getSelection();
+      let contentState = editorState.getCurrentContent();
+      let contentStateWithoutEntity = Modifier.applyEntity(
+        contentState,
+        selectionState,
+        null
+      );
+      editorState = EditorState.push(
+        editorState,
+        contentStateWithoutEntity,
+        'apply-entity'
+      );
+
+      return {
+        ...state,
+        editorState,
+        activeMap: getActiveMap({
+          editorState,
+          blockNames,
+          styleNames,
+          decoratorNames,
+        }),
+      };
+    }
+
+    case APPLY_ENTITY: {
+      let {
+        editorState,
+        blockNames,
+        styleNames,
+        decoratorNames,
+      } = state;
+      let selectionState = editorState.getSelection();
+      let contentState = editorState.getCurrentContent();
+
+      let contentStateWithNewEntity = contentState.createEntity(
+        action.entityName,
+        action.mutability,
+        action.data
+      );
+      let entityKey = contentStateWithNewEntity.getLastCreatedEntityKey();
+      let contentStateWithEntity = Modifier.applyEntity(
+        contentStateWithNewEntity,
+        selectionState,
+        entityKey
+      );
+      editorState = EditorState.push(
+        editorState,
+        contentStateWithEntity,
+        'apply-entity'
+      );
+
+      return {
+        ...state,
+        editorState,
+        activeMap: getActiveMap({
+          editorState,
+          blockNames,
+          styleNames,
+          decoratorNames,
+        }),
+      };
+    }
+
+    case INSERT_ENTITY: {
+      let {
+        editorState,
+        blockNames,
+        styleNames,
+        decoratorNames,
+      } = state;
+      let selectionState = editorState.getSelection();
+      let contentState = editorState.getCurrentContent();
+
+      let contentStateWithNewEntity = contentState.createEntity(
+        action.entityName,
+        action.mutability,
+        action.data
+      );
+      let entityKey = contentStateWithNewEntity.getLastCreatedEntityKey();
+
+      let firstBlank = Modifier.insertText(
+        contentState,
+        selectionState,
+        ' ',
+        null,
+        null
+      );
+      let withEntity = Modifier.insertText(
+        firstBlank,
+        selectionState,
+        action.text,
+        null,
+        entityKey
+      );
+      let withBlank = Modifier.insertText(
+        withEntity,
+        selectionState,
+        ' ',
+        null,
+        null,
+      );
+
+      editorState = EditorState.push(
+        editorState,
+        withBlank,
+        'insert-text'
+      );
+
+      return {
+        ...state,
+        editorState,
+        activeMap: getActiveMap({
+          editorState,
+          blockNames,
+          styleNames,
+          decoratorNames,
         }),
       };
     }

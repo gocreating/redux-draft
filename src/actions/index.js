@@ -4,6 +4,9 @@ import {
   UPDATE_EDITOR_STATE,
   TOGGLE_BLOCK,
   TOGGLE_STYLE,
+  REMOVE_ENTITY,
+  APPLY_ENTITY,
+  INSERT_ENTITY,
 } from '../constants/ActionTypes';
 
 export let init = (editorName, config) => {
@@ -43,5 +46,35 @@ export let toggleStyle = (editorName, styleName) => {
     type: TOGGLE_STYLE,
     editorName,
     styleName,
+  };
+};
+
+export let removeEntity = (editorName) => {
+  return {
+    type: REMOVE_ENTITY,
+    editorName,
+  };
+};
+
+export let applyEntity = (editorName, entityName, mutability, data) => {
+  return {
+    type: APPLY_ENTITY,
+    editorName,
+    entityName,
+    mutability,
+    data,
+  };
+};
+
+export let insertEntity = (
+  editorName, entityName, mutability, data, text = ' '
+) => {
+  return {
+    type: INSERT_ENTITY,
+    editorName,
+    entityName,
+    mutability,
+    data,
+    text,
   };
 };
