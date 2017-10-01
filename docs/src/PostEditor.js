@@ -18,6 +18,51 @@ class PostEditor extends Component {
     this.props.toggleStyle(styleName);
   }
 
+  handleLinkClick = (e) => {
+    let {
+      editorState,
+      activeMap,
+      focus,
+      insertEntity,
+      applyEntity,
+      removeEntity,
+    } = this.props;
+    let selectionState = editorState.getSelection();
+    let isCollapsed = selectionState.isCollapsed();
+
+    if (!activeMap.LINK) {
+      let url = prompt('url');
+
+      focus();
+      if (!url) {
+        return;
+      }
+      if (isCollapsed) {
+        insertEntity('LINK', 'MUTABLE', { url }, url);
+      } else {
+        applyEntity('LINK', 'MUTABLE', { url });
+      }
+    } else {
+      if (isCollapsed) {
+        focus();
+        alert('Please select a range');
+      } else {
+        focus();
+        removeEntity();
+      }
+    }
+  }
+
+  handleImageClick = (e) => {
+    let { focus, insertEntity } = this.props;
+    let src = prompt('src');
+
+    focus();
+    if (src) {
+      insertEntity('IMAGE', 'IMMUTABLE', { src });
+    }
+  }
+
   render() {
     let {
       setRef,
@@ -28,6 +73,8 @@ class PostEditor extends Component {
       customStyleMap,
       activeMap,
     } = this.props;
+    let selectionState = editorState.getSelection();
+    let isCollapsed = selectionState.isCollapsed();
 
     return (
       <div className="post-editor">
@@ -132,6 +179,23 @@ class PostEditor extends Component {
             label="Code"
             active={activeMap.CUSTOM_CODE}
             onClick={this.toggleStyle('CUSTOM_CODE')}
+          />
+        </Controls>
+        <Controls>
+          <Control
+            label={
+              activeMap.LINK && !isCollapsed ?
+              'Remove Link' :
+              'Link'
+            }
+            disabled={activeMap.LINK && isCollapsed}
+            active={activeMap.LINK}
+            onClick={this.handleLinkClick}
+          />
+          <Control
+            label="Image"
+            active={activeMap.IMAGE}
+            onClick={this.handleImageClick}
           />
         </Controls>
         <div className="editor">

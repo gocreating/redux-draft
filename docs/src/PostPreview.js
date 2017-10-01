@@ -107,6 +107,7 @@ class PostPreview extends Component {
       customStyleMap,
       blockNames,
       styleNames,
+      decoratorNames,
       renderMap,
     } = this.props;
     let contentState = editorState.getCurrentContent();
@@ -146,10 +147,16 @@ class PostPreview extends Component {
         return map;
       }, {}
     );
-
+    let entityRenderer = decoratorNames.reduce(
+      (map, decoratorName) => {
+        map[decoratorName] = mergedRenderMap[decoratorName];
+        return map;
+      }, {}
+    );
     let renderers = {
       inline: inlineRenderer,
       blocks: blockRenderer,
+      entities: entityRenderer,
     };
     let rendered = redraft(rawContent, renderers);
 

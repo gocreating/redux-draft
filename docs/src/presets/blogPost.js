@@ -1,6 +1,10 @@
 import React from 'react';
 import EditorHeader from '../blockComponents/Header/EditorHeader';
 import Header from '../blockComponents/Header/Header';
+import EditorLink from '../decoratorComponents/Link/EditorLink';
+import EditorImage from '../decoratorComponents/Image/EditorImage';
+import linkStrategy from '../strategies/link';
+import imageStrategy from '../strategies/image';
 
 export default {
   name: 'BLOG_POST',
@@ -24,6 +28,16 @@ export default {
       backgroundColor: 'rgba(0, 0, 0, 0.05)',
       fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
       padding: 2,
+    },
+  },
+  decoratorMap: {
+    LINK: {
+      strategy: linkStrategy,
+      component: EditorLink,
+    },
+    IMAGE: {
+      strategy: imageStrategy,
+      component: EditorImage,
     },
   },
   renderMap: {
@@ -115,6 +129,21 @@ export default {
       <Header level={2}>
         {child}
       </Header>
+    ),
+    LINK: (children, data, { key }) => (
+      <a
+        key={key}
+        href={data.url}
+      >
+        {children}
+      </a>
+    ),
+    IMAGE: (children, data, { key }) => (
+      <img
+        key={key}
+        alt=""
+        src={data.src}
+      />
     ),
   },
 };

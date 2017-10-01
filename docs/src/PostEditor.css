@@ -20,3 +20,6 @@
   outline: 1px solid #ddd;
   background-color: #ddd;
 }
+.post-editor .controls .control.disabled {
+  cursor:not-allowed;
+}
