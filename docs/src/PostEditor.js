@@ -1,13 +1,19 @@
+import request from 'superagent';
 import React, { Component } from 'react';
 import { Editor } from 'draft-js';
 import { reduxDraft } from '../../lib';
 import Controls from './Controls';
 import Control from './Control';
 import blogPost from './presets/blogPost';
+import configs from '../configs';
 import 'draft-js/dist/Draft.css';
 import './PostEditor.css';
 
 class PostEditor extends Component {
+  state = {
+    isFileUploading: false,
+  }
+
   toggleBlock = (blockName) => (e) => {
     this.props.focus();
     this.props.toggleBlock(blockName);
@@ -63,6 +69,35 @@ class PostEditor extends Component {
     }
   }
 
+  handleUploadClick = (e) => {
+    let { focus, insertEntity } = this.props;
+    let file = this.fileInput.files[0];
+    let form = new FormData();
+
+    if (!file) {
+      return alert('Please select a file');
+    }
+    this.setState({ isFileUploading: true });
+    form.append('image', file);
+    request
+      .post('https://api.imgur.com/3/image')
+      .send(form)
+      .set('authorization', `Client-ID ${configs.imgur.clientID}`)
+      .end((err, res) => {
+        this.setState({ isFileUploading: false });
+        this.fileInput.value = '';
+        if (err) {
+          throw err;
+        }
+        let { link } = res.body.data;
+
+        focus();
+        insertEntity('IMAGE', 'IMMUTABLE', {
+          src: link,
+        });
+      });
+  }
+
   render() {
     let {
       setRef,
@@ -73,6 +108,7 @@ class PostEditor extends Component {
       customStyleMap,
       activeMap,
     } = this.props;
+    let { isFileUploading } = this.state;
     let selectionState = editorState.getSelection();
     let isCollapsed = selectionState.isCollapsed();
 
@@ -208,6 +244,22 @@ class PostEditor extends Component {
             customStyleMap={customStyleMap}
             placeholder="write something..."
           />
+        </div>
+        <div>
+          <form>
+            <legend>Insert Image</legend>
+            <input
+              ref={ref => { this.fileInput = ref; }}
+              type="file"
+            />
+            <button
+              type="button"
+              disabled={isFileUploading}
+              onClick={this.handleUploadClick}
+            >
+              {isFileUploading ? 'Uploading...' : 'Upload'}
+            </button>
+          </form>
         </div>
       </div>
     );
