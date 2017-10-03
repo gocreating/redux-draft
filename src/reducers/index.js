@@ -6,6 +6,7 @@ import {
   DefaultDraftInlineStyle,
   CompositeDecorator,
   Modifier,
+  AtomicBlockUtils,
 } from 'draft-js';
 import {
   INIT,
@@ -16,6 +17,7 @@ import {
   REMOVE_ENTITY,
   APPLY_ENTITY,
   INSERT_ENTITY,
+  INSERT_ATOMIC_BLOCK,
 } from '../constants/ActionTypes';
 import isEntityActive from '../utils/isEntityActive';
 
@@ -338,6 +340,42 @@ let editorReducer = (state = initialEditorState, action) => {
         'insert-text'
       );
 
+      return {
+        ...state,
+        editorState,
+        activeMap: getActiveMap({
+          editorState,
+          blockNames,
+          styleNames,
+          decoratorNames,
+        }),
+      };
+    }
+
+    case INSERT_ATOMIC_BLOCK: {
+      let {
+        editorState,
+        blockNames,
+        styleNames,
+        decoratorNames,
+      } = state;
+      let contentState = editorState.getCurrentContent();
+      let contentStateWithNewEntity = contentState.createEntity(
+        action.entityName,
+        action.mutability,
+        action.data
+      );
+      let entityKey = contentStateWithNewEntity.getLastCreatedEntityKey();
+
+      editorState = EditorState.set(
+        editorState,
+        {currentContent: contentStateWithNewEntity},
+      );
+      editorState = AtomicBlockUtils.insertAtomicBlock(
+        editorState,
+        entityKey,
+        action.text
+      );
       return {
         ...state,
         editorState,

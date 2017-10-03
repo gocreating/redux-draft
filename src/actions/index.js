@@ -7,6 +7,7 @@ import {
   REMOVE_ENTITY,
   APPLY_ENTITY,
   INSERT_ENTITY,
+  INSERT_ATOMIC_BLOCK,
 } from '../constants/ActionTypes';
 
 export let init = (editorName, config) => {
@@ -71,6 +72,19 @@ export let insertEntity = (
 ) => {
   return {
     type: INSERT_ENTITY,
+    editorName,
+    entityName,
+    mutability,
+    data,
+    text,
+  };
+};
+
+export let insertAtomicBlock = (
+  editorName, entityName, mutability, data, text = ' '
+) => {
+  return {
+    type: INSERT_ATOMIC_BLOCK,
     editorName,
     entityName,
     mutability,
