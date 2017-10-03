@@ -1,6 +1,6 @@
 import request from 'superagent';
 import React, { Component } from 'react';
-import { Editor } from 'draft-js';
+import { Editor, RichUtils } from 'draft-js';
 import { reduxDraft } from '../../lib';
 import Controls from './Controls';
 import Control from './Control';
@@ -12,6 +12,16 @@ import './PostEditor.css';
 class PostEditor extends Component {
   state = {
     isFileUploading: false,
+  }
+
+  handleKeyCommand = (command, editorState) => {
+    let newState = RichUtils.handleKeyCommand(editorState, command);
+
+    if (newState) {
+      this.props.updateEditorState(newState);
+      return true;
+    }
+    return false;
   }
 
   toggleBlock = (blockName) => (e) => {
@@ -239,6 +249,7 @@ class PostEditor extends Component {
             ref={setRef}
             editorState={editorState}
             onChange={updateEditorState}
+            handleKeyCommand={this.handleKeyCommand}
             blockRenderMap={blockRenderMap}
             blockRendererFn={blockRendererFn}
             customStyleMap={customStyleMap}
