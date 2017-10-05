@@ -116,6 +116,7 @@ class PostEditor extends Component {
       blockRenderMap,
       blockRendererFn,
       customStyleMap,
+      readOnly,
       activeMap,
     } = this.props;
     let { isFileUploading } = this.state;
@@ -253,6 +254,7 @@ class PostEditor extends Component {
             blockRenderMap={blockRenderMap}
             blockRendererFn={blockRendererFn}
             customStyleMap={customStyleMap}
+            readOnly={readOnly}
             placeholder="write something..."
           />
         </div>
