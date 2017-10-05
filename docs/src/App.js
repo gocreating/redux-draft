@@ -1,23 +1,26 @@
-import React, { Component } from 'react';
-import PostEditor from './PostEditor';
-import PostPreview from './PostPreview';
-import PostRaw from './PostRaw';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <h1>Redux Draft</h1>
-        <hr />
-        <h2>Editor</h2>
-        <PostEditor />
-        <h2>Preview</h2>
-        <PostPreview />
-        <h2>Raw</h2>
-        <PostRaw />
-      </div>
-    );
-  }
-}
+let App = () => (
+  <Router basename="/redux-draft">
+    <Switch>
+      <Route
+        exact
+        path="/"
+        component={require('./pages/HomePage').default}
+      />
+      <Route
+        exact
+        path="/examples/raw-editor"
+        component={require('./pages/examples/RawEditorPage').default}
+      />
+    </Switch>
+  </Router>
+);
 
 export default App;

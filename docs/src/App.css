@@ -1,0 +1,17 @@
+.navigation {
+  font-size: 1.5em;
+}
+.navigation a {
+  text-decoration: none;
+  color: #999;
+}
+.navigation a:hover {
+  text-decoration: underline;
+}
+.navigation a.active {
+  color: #000;
+  font-weight: bold;
+}
+.rd.wrapper {
+  padding: 15px;
+}

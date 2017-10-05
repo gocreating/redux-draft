@@ -11,7 +11,7 @@ import linkStrategy from '../strategies/link';
 import imageStrategy from '../strategies/image';
 
 export default {
-  name: 'BLOG_POST',
+  name: 'RAW',
   customBlockMap: {
     HEADER_LEVEL_1: {
       component: BlockHeader,

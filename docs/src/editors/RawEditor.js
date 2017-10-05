@@ -1,15 +1,15 @@
 import request from 'superagent';
 import React, { Component } from 'react';
 import { Editor, RichUtils } from 'draft-js';
-import { reduxDraft } from '../../lib';
-import Controls from './Controls';
-import Control from './Control';
-import blogPost from './presets/blogPost';
-import configs from '../configs';
+import { reduxDraft } from '../../../lib';
+import Controls from '../Controls';
+import Control from '../Control';
+import raw from '../presets/raw';
+import configs from '../../configs';
 import 'draft-js/dist/Draft.css';
-import './PostEditor.css';
+import './RawEditor.css';
 
-class PostEditor extends Component {
+class RawEditor extends Component {
   state = {
     isFileUploading: false,
   }
@@ -137,7 +137,7 @@ class PostEditor extends Component {
     let isCollapsed = selectionState.isCollapsed();
 
     return (
-      <div className="post-editor">
+      <div className="raw-editor">
         <Controls>
           <Control
             label="Normal"
@@ -303,4 +303,4 @@ class PostEditor extends Component {
   }
 }
 
-export default reduxDraft(blogPost)(PostEditor);
+export default reduxDraft(raw)(RawEditor);
