@@ -7,6 +7,7 @@ import {
   CompositeDecorator,
   Modifier,
   AtomicBlockUtils,
+  SelectionState,
 } from 'draft-js';
 import {
   INIT,
@@ -20,6 +21,7 @@ import {
   APPLY_ENTITY,
   INSERT_ENTITY,
   INSERT_ATOMIC_BLOCK,
+  REMOVE_BLOCK,
   UPDATE_ENTITY_DATA,
 } from '../constants/ActionTypes';
 import isEntityActive from '../utils/isEntityActive';
@@ -431,6 +433,37 @@ let editorReducer = (state = initialEditorState, action) => {
           styleNames,
           decoratorNames,
         }),
+      };
+    }
+
+    case REMOVE_BLOCK: {
+      let { editorState } = state;
+      let contentState = editorState.getCurrentContent();
+      let block = contentState.getBlockForKey(action.blockKey);
+      let targetRange = new SelectionState({
+        anchorKey: action.blockKey,
+        anchorOffset: 0,
+        focusKey: action.blockKey,
+        focusOffset: block.getLength(),
+      });
+      let withoutBlock = Modifier.removeRange(
+        contentState,
+        targetRange,
+        'backward'
+      );
+      let resetBlock = Modifier.setBlockType(
+        withoutBlock,
+        withoutBlock.getSelectionAfter(),
+        'unstyled',
+      );
+
+      contentState = EditorState.push(editorState, resetBlock, 'remove-range');
+      editorState = EditorState.forceSelection(
+        contentState, resetBlock.getSelectionAfter()
+      );
+      return {
+        ...state,
+        editorState,
       };
     }
 

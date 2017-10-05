@@ -10,6 +10,7 @@ import {
   APPLY_ENTITY,
   INSERT_ENTITY,
   INSERT_ATOMIC_BLOCK,
+  REMOVE_BLOCK,
   UPDATE_ENTITY_DATA,
 } from '../constants/ActionTypes';
 
@@ -109,6 +110,16 @@ export let insertAtomicBlock = (
     mutability,
     data,
     text,
+  };
+};
+
+export let removeBlock = (
+  editorName, blockKey
+) => {
+  return {
+    type: REMOVE_BLOCK,
+    editorName,
+    blockKey,
   };
 };
 
