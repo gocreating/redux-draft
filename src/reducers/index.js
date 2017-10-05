@@ -19,6 +19,7 @@ import {
   APPLY_ENTITY,
   INSERT_ENTITY,
   INSERT_ATOMIC_BLOCK,
+  UPDATE_ENTITY_DATA,
 } from '../constants/ActionTypes';
 import isEntityActive from '../utils/isEntityActive';
 
@@ -394,6 +395,21 @@ let editorReducer = (state = initialEditorState, action) => {
           styleNames,
           decoratorNames,
         }),
+      };
+    }
+
+    case UPDATE_ENTITY_DATA: {
+      let { editorState } = state;
+      let contentState = editorState.getCurrentContent();
+      contentState = contentState.mergeEntityData(
+        action.entityKey,
+        action.data
+      );
+      editorState = EditorState.createWithContent(contentState);
+
+      return {
+        ...state,
+        editorState,
       };
     }
   }

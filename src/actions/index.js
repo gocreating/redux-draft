@@ -9,6 +9,7 @@ import {
   APPLY_ENTITY,
   INSERT_ENTITY,
   INSERT_ATOMIC_BLOCK,
+  UPDATE_ENTITY_DATA,
 } from '../constants/ActionTypes';
 
 export let init = (editorName, config) => {
@@ -99,5 +100,16 @@ export let insertAtomicBlock = (
     mutability,
     data,
     text,
+  };
+};
+
+export let updateEntityData = (
+  editorName, entityKey, data
+) => {
+  return {
+    type: UPDATE_ENTITY_DATA,
+    editorName,
+    entityKey,
+    data,
   };
 };
