@@ -2,6 +2,7 @@ import {
   INIT,
   SET_REF,
   UPDATE_EDITOR_STATE,
+  UPDATE_READ_ONLY,
   TOGGLE_BLOCK,
   TOGGLE_STYLE,
   REMOVE_ENTITY,
@@ -31,6 +32,14 @@ export let updateEditorState = (editorName, editorState) => {
     type: UPDATE_EDITOR_STATE,
     editorName,
     editorState,
+  };
+};
+
+export let updateReadOnly = (editorName, readOnly) => {
+  return {
+    type: UPDATE_READ_ONLY,
+    editorName,
+    readOnly,
   };
 };
 

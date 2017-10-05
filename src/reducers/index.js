@@ -12,6 +12,7 @@ import {
   INIT,
   SET_REF,
   UPDATE_EDITOR_STATE,
+  UPDATE_READ_ONLY,
   TOGGLE_BLOCK,
   TOGGLE_STYLE,
   REMOVE_ENTITY,
@@ -148,6 +149,7 @@ let editorReducer = (state = initialEditorState, action) => {
         customStyleMap,
         blockRenderMap,
         blockRendererFn,
+        readOnly: false,
       };
     }
 
@@ -175,6 +177,13 @@ let editorReducer = (state = initialEditorState, action) => {
           styleNames,
           decoratorNames,
         }),
+      };
+    }
+
+    case UPDATE_READ_ONLY: {
+      return {
+        ...state,
+        readOnly: action.readOnly,
       };
     }
 
