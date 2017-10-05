@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/index';
@@ -11,6 +12,24 @@ export default (config) => (WrappedComponent) => {
       if (!_initialized) {
         init(config);
       }
+    }
+
+    getChildContext() {
+      let {
+        updateEditorState,
+        updateReadOnly,
+        updateEntityData,
+        removeBlock,
+      } = this.props;
+
+      return {
+        _reduxDraft: {
+          updateEditorState,
+          updateReadOnly,
+          updateEntityData,
+          removeBlock,
+        },
+      };
     }
 
     render() {
@@ -35,6 +54,10 @@ export default (config) => (WrappedComponent) => {
       ) : null;
     }
   }
+
+  ReduxDraft.childContextTypes = {
+    _reduxDraft: PropTypes.object,
+  };
 
   let mapStateToProps = (state) => {
     let currentDraft = state.draft[config.name] || {};
