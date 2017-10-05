@@ -27,6 +27,10 @@ let PageLayout = ({ children }) => (
       <NavLink to="/examples/raw-editor">
         Raw Editor
       </NavLink>
+      {' | '}
+      <NavLink to="/examples/bs-editor">
+        Bootstrap Editor
+      </NavLink>
     </nav>
     <hr />
     {children}
