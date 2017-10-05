@@ -1,14 +1,15 @@
 import React from 'react';
+import Image from './Image';
 
-let EditorImage = (props) => {
+let DecoratorImage = (props) => {
   let { src } = props.contentState.getEntity(props.entityKey).getData();
 
   return (
-    <img
+    <Image
       alt=""
       src={src}
     />
   );
 };
 
-export default EditorImage;
+export default DecoratorImage;

@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import DraftEditorBlock from 'draft-js/lib/DraftEditorBlock.react';
 
-let EditorHeader = ({
+let BlockHeader = ({
   blockProps: { level = 1 }, ...rest
 }) => (
   <Header level={level}>
@@ -10,4 +10,4 @@ let EditorHeader = ({
   </Header>
 );
 
-export default EditorHeader;
+export default BlockHeader;

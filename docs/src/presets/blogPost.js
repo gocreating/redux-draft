@@ -1,8 +1,10 @@
 import React from 'react';
-import EditorHeader from '../blockComponents/Header/EditorHeader';
-import Header from '../blockComponents/Header/Header';
-import EditorLink from '../decoratorComponents/Link/EditorLink';
-import EditorImage from '../decoratorComponents/Image/EditorImage';
+import BlockHeader from '../draftComponents/Header/BlockHeader';
+import Header from '../draftComponents/Header/Header';
+import EntityLink from '../draftComponents/Link/EntityLink';
+import Link from '../draftComponents/Link/Link';
+import DecoratorImage from '../draftComponents/Image/DecoratorImage';
+import Image from '../draftComponents/Image/Image';
 import linkStrategy from '../strategies/link';
 import imageStrategy from '../strategies/image';
 
@@ -10,12 +12,12 @@ export default {
   name: 'BLOG_POST',
   customBlockMap: {
     HEADER_LEVEL_1: {
-      component: EditorHeader,
+      component: BlockHeader,
       props: { level: 1 },
       editable: true,
     },
     HEADER_LEVEL_2: {
-      component: EditorHeader,
+      component: BlockHeader,
       props: { level: 2 },
       editable: true,
     },
@@ -33,11 +35,11 @@ export default {
   decoratorMap: {
     LINK: {
       strategy: linkStrategy,
-      component: EditorLink,
+      component: EntityLink,
     },
     IMAGE: {
       strategy: imageStrategy,
-      component: EditorImage,
+      component: DecoratorImage,
     },
   },
   renderMap: {
@@ -131,15 +133,15 @@ export default {
       </Header>
     ),
     LINK: (children, data, { key }) => (
-      <a
+      <Link
         key={key}
         href={data.url}
       >
         {children}
-      </a>
+      </Link>
     ),
     IMAGE: (children, data, { key }) => (
-      <img
+      <Image
         key={key}
         alt=""
         src={data.src}

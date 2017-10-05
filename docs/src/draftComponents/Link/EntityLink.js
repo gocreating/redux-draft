@@ -1,6 +1,6 @@
 import React from 'react';
 
-let EditorLink = (props) => {
+let EntityLink = (props) => {
   let { url } = props.contentState.getEntity(props.entityKey).getData();
 
   return (
@@ -8,4 +8,4 @@ let EditorLink = (props) => {
   );
 };
 
-export default EditorLink;
+export default EntityLink;
