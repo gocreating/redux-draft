@@ -84,8 +84,18 @@ class PostEditor extends Component {
     }
   }
 
+  handleBlockImageClick = (e) => {
+    let { focus, insertAtomicBlock } = this.props;
+    let src = prompt('src');
+
+    focus();
+    if (src) {
+      insertAtomicBlock('IMAGE', 'IMMUTABLE', { src });
+    }
+  }
+
   handleUploadClick = (e) => {
-    let { focus, insertEntity } = this.props;
+    let { focus, insertAtomicBlock } = this.props;
     let file = this.fileInput.files[0];
     let form = new FormData();
 
@@ -107,9 +117,7 @@ class PostEditor extends Component {
         let { link } = res.body.data;
 
         focus();
-        insertEntity('IMAGE', 'IMMUTABLE', {
-          src: link,
-        });
+        insertAtomicBlock('IMAGE', 'IMMUTABLE', { src: link });
       });
   }
 
@@ -250,9 +258,15 @@ class PostEditor extends Component {
             onClick={this.handleLinkClick}
           />
           <Control
-            label="Image"
+            label="Inline Image"
             active={activeMap.IMAGE}
             onClick={this.handleImageClick}
+          />
+        </Controls>
+        <Controls>
+          <Control
+            label="Block Image"
+            onClick={this.handleBlockImageClick}
           />
         </Controls>
         <div className="editor">
@@ -270,7 +284,7 @@ class PostEditor extends Component {
         </div>
         <div>
           <form>
-            <legend>Insert Image</legend>
+            <legend>Upload Block Image:</legend>
             <input
               ref={ref => { this.fileInput = ref; }}
               type="file"

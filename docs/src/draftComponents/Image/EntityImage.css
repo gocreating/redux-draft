@@ -1,0 +1,11 @@
+.rd.entity-image {
+  cursor: pointer;
+}
+.rd.entity-image:hover {
+  outline: 1px dashed #ccc;
+  background-color: #efefef;
+}
+.rd.entity-image.active {
+  outline: 1px dashed #999;
+  background-color: #bbb;
+}

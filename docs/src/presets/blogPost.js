@@ -1,8 +1,10 @@
 import React from 'react';
 import BlockHeader from '../draftComponents/Header/BlockHeader';
 import Header from '../draftComponents/Header/Header';
+import BlockAtomic from '../draftComponents/Atomic/BlockAtomic';
 import EntityLink from '../draftComponents/Link/EntityLink';
 import Link from '../draftComponents/Link/Link';
+import EntityImage from '../draftComponents/Image/EntityImage';
 import DecoratorImage from '../draftComponents/Image/DecoratorImage';
 import Image from '../draftComponents/Image/Image';
 import linkStrategy from '../strategies/link';
@@ -20,6 +22,15 @@ export default {
       component: BlockHeader,
       props: { level: 2 },
       editable: true,
+    },
+    atomic: {
+      component: BlockAtomic,
+      props: {
+        componentMap: {
+          IMAGE: EntityImage,
+        },
+      },
+      editable: false,
     },
   },
   customStyleMap: {
