@@ -24,6 +24,11 @@ class PostEditor extends Component {
     return false;
   }
 
+  applyBlock = (blockName) => (e) => {
+    this.props.focus();
+    this.props.applyBlock(blockName);
+  }
+
   toggleBlock = (blockName) => (e) => {
     this.props.focus();
     this.props.toggleBlock(blockName);
@@ -126,6 +131,11 @@ class PostEditor extends Component {
     return (
       <div className="post-editor">
         <Controls>
+          <Control
+            label="Normal"
+            active={activeMap['unstyled']}
+            onClick={this.applyBlock('unstyled')}
+          />
           <Control
             label="H1"
             active={activeMap['header-one']}
