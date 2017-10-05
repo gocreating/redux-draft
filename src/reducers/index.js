@@ -15,6 +15,7 @@ import {
   UPDATE_READ_ONLY,
   TOGGLE_BLOCK,
   TOGGLE_STYLE,
+  APPLY_BLOCK,
   REMOVE_ENTITY,
   APPLY_ENTITY,
   INSERT_ENTITY,
@@ -222,6 +223,41 @@ let editorReducer = (state = initialEditorState, action) => {
         action.styleName
       );
 
+      return {
+        ...state,
+        editorState,
+        activeMap: getActiveMap({
+          editorState,
+          blockNames,
+          styleNames,
+          decoratorNames,
+        }),
+      };
+    }
+
+    case APPLY_BLOCK: {
+      let {
+        editorState,
+        blockNames,
+        styleNames,
+        decoratorNames,
+      } = state;
+      let contentState = editorState.getCurrentContent();
+      let selectionState = editorState.getSelection();
+      let setBlock = Modifier.setBlockType(
+        contentState,
+        selectionState,
+        action.blockName,
+      );
+
+      contentState = EditorState.push(
+        editorState,
+        setBlock,
+        'change-block-type'
+      );
+      editorState = EditorState.forceSelection(
+        contentState, setBlock.getSelectionAfter()
+      );
       return {
         ...state,
         editorState,

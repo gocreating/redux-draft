@@ -5,6 +5,7 @@ import {
   UPDATE_READ_ONLY,
   TOGGLE_BLOCK,
   TOGGLE_STYLE,
+  APPLY_BLOCK,
   REMOVE_ENTITY,
   APPLY_ENTITY,
   INSERT_ENTITY,
@@ -57,6 +58,14 @@ export let toggleStyle = (editorName, styleName) => {
     type: TOGGLE_STYLE,
     editorName,
     styleName,
+  };
+};
+
+export let applyBlock = (editorName, blockName) => {
+  return {
+    type: APPLY_BLOCK,
+    editorName,
+    blockName,
   };
 };
 
