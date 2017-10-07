@@ -13,16 +13,8 @@ class EntityImage extends Component {
     };
   }
 
-  getData = () => {
-    let { contentState, entityKey } = this.props;
-    let entity = contentState.getEntity(entityKey);
-    let data = entity.getData();
-
-    return data;
-  }
-
   componentDidMount() {
-    let data = this.getData();
+    let data = this.props.getData();
 
     this.setState({
       src: data.src,
@@ -63,7 +55,7 @@ class EntityImage extends Component {
   }
 
   render() {
-    let propData = this.getData();
+    let propData = this.props.getData();
     let { editMode, src } = this.state;
     let cx = classNames('rd', 'entity-image', {
       'active': editMode,
