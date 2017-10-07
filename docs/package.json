@@ -6,8 +6,10 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "gh-pages": "^1.0.0",
+    "katex": "^0.9.0-alpha",
     "react-bootstrap": "^0.31.3",
     "react-helmet": "^5.2.0",
+    "react-katex": "^1.2.0",
     "react-router-dom": "^4.2.2",
     "redraft": "^0.8.0",
     "redux": "^3.7.2",

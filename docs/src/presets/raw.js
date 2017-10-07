@@ -7,8 +7,12 @@ import Link from '../draftComponents/Link/Link';
 import EntityImage from '../draftComponents/Image/EntityImage';
 import DecoratorImage from '../draftComponents/Image/DecoratorImage';
 import Image from '../draftComponents/Image/Image';
+import EntityTeX from '../draftComponents/TeX/EntityTeX';
+import DecoratorTeX from '../draftComponents/TeX/DecoratorTeX';
+import TeX from '../draftComponents/TeX/TeX';
 import linkStrategy from '../strategies/link';
 import imageStrategy from '../strategies/image';
+import texStrategy from '../strategies/tex';
 
 export default {
   name: 'RAW',
@@ -28,6 +32,7 @@ export default {
       props: {
         componentMap: {
           IMAGE: EntityImage,
+          TEX: EntityTeX,
         },
       },
       editable: false,
@@ -51,6 +56,10 @@ export default {
     IMAGE: {
       strategy: imageStrategy,
       component: DecoratorImage,
+    },
+    TEX: {
+      strategy: texStrategy,
+      component: DecoratorTeX,
     },
   },
   renderMap: {
@@ -156,6 +165,12 @@ export default {
         key={key}
         alt=""
         src={data.src}
+      />
+    ),
+    TEX: (children, data, { key }) => (
+      <TeX
+        key={key}
+        math={data.math}
       />
     ),
   },

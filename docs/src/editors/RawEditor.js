@@ -94,6 +94,15 @@ class RawEditor extends Component {
     }
   }
 
+  handleBlockTeXClick = (e) => {
+    let { focus, insertAtomicBlock } = this.props;
+
+    focus();
+    insertAtomicBlock('TEX', 'IMMUTABLE', {
+      math: 'P(E) = {n \\choose k} p^k (1-p)^{ n-k} ',
+    });
+  }
+
   handleUploadClick = (e) => {
     let { focus, insertAtomicBlock } = this.props;
     let file = this.fileInput.files[0];
@@ -267,6 +276,10 @@ class RawEditor extends Component {
           <Control
             label="Block Image"
             onClick={this.handleBlockImageClick}
+          />
+          <Control
+            label="TeX"
+            onClick={this.handleBlockTeXClick}
           />
         </Controls>
         <div className="editor">

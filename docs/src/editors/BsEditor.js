@@ -115,6 +115,15 @@ class BsEditor extends Component {
     }
   }
 
+  handleTeXClick = (e) => {
+    let { focus, insertAtomicBlock } = this.props;
+
+    focus();
+    insertAtomicBlock('TEX', 'IMMUTABLE', {
+      math: 'P(E) = {n \\choose k} p^k (1-p)^{ n-k} ',
+    });
+  }
+
   handleFileChange = (e) => {
     let { updateReadOnly, focus, insertAtomicBlock } = this.props;
     let file = this.fileInput.files[0];
@@ -285,6 +294,10 @@ class BsEditor extends Component {
               }
               disabled={isFileUploading}
               onClick={() => this.fileInput.click()}
+            />
+            <ControlButton
+              label={<i className="fa fa-calculator" aria-hidden="true" />}
+              onClick={this.handleTeXClick}
             />
           </ButtonGroup>
         </ButtonToolbar>

@@ -1,0 +1,17 @@
+.rd.entity-tex {
+  cursor: pointer;
+}
+.rd.entity-tex:hover {
+  outline: 1px dashed #ccc;
+  background-color: #efefef;
+}
+.rd.entity-tex.active {
+  outline: 1px dashed #999;
+  background-color: #bbb;
+}
+.rd.entity-tex .textarea {
+  display: block;
+  width: 70%;
+  min-height: 100px;
+  margin: 0 auto;
+}
