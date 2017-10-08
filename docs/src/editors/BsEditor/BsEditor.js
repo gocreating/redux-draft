@@ -95,6 +95,18 @@ class BsEditor extends Component {
     });
   }
 
+  handleCodeHighlightClick = (e) => {
+    let { focus, insertAtomicBlock } = this.props;
+
+    focus();
+    insertAtomicBlock('CODE_HIGHLIGHT', 'IMMUTABLE', {
+      language: 'javascript',
+      lineNumbers: false,
+      lineHighlight: '',
+      value: 'console.log(\'Hello world!\');',
+    });
+  }
+
   handleFileChange = (e) => {
     let { updateReadOnly, focus, insertAtomicBlock } = this.props;
     let file = this.fileInput.files[0];
@@ -269,6 +281,10 @@ class BsEditor extends Component {
             <ControlButton
               label={<i className="fa fa-calculator" aria-hidden="true" />}
               onClick={this.handleTeXClick}
+            />
+            <ControlButton
+              label={<i className="fa fa-file-code-o" aria-hidden="true" />}
+              onClick={this.handleCodeHighlightClick}
             />
           </ButtonGroup>
         </ButtonToolbar>

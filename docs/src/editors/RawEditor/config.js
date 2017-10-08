@@ -8,6 +8,9 @@ import EntityImage from '../../draftComponents/Image/EntityImage';
 import Image from '../../draftComponents/Image/Image';
 import EntityTeX from '../../draftComponents/TeX/EntityTeX';
 import TeX from '../../draftComponents/TeX/TeX';
+import EntityCodeHighlight
+from '../../draftComponents/CodeHighlight/EntityCodeHighlight';
+import CodeHighlight from '../../draftComponents/CodeHighlight/CodeHighlight';
 import linkStrategy from '../../strategies/link';
 
 export default {
@@ -29,6 +32,7 @@ export default {
         componentMap: {
           IMAGE: EntityImage,
           TEX: EntityTeX,
+          CODE_HIGHLIGHT: EntityCodeHighlight,
         },
       },
       editable: false,
@@ -48,6 +52,7 @@ export default {
     // you can use atomic block to display these entities
     IMAGE: EntityImage,
     TEX: EntityTeX,
+    CODE_HIGHLIGHT: EntityCodeHighlight,
   },
   decoratorMap: {
     LINK: {
@@ -164,6 +169,15 @@ export default {
       <TeX
         key={key}
         math={data.math}
+      />
+    ),
+    CODE_HIGHLIGHT: (children, data, { key }) => (
+      <CodeHighlight
+        key={key}
+        language={data.language}
+        lineNumbers={data.lineNumbers}
+        lineHighlight={data.lineHighlight}
+        value={data.value}
       />
     ),
   },

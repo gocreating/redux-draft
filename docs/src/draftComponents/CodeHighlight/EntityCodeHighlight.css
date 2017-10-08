@@ -1,0 +1,17 @@
+.rd.entity-code-highlight {
+  cursor: pointer;
+}
+.rd.entity-code-highlight:hover {
+  outline: 1px dashed #ccc;
+  background-color: #efefef;
+}
+.rd.entity-code-highlight.active {
+  outline: 1px dashed #999;
+  background-color: #bbb;
+}
+.rd.entity-code-highlight .textarea {
+  display: block;
+  width: 70%;
+  min-height: 100px;
+  margin: 0 auto;
+}

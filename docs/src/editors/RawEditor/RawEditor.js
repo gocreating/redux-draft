@@ -93,6 +93,18 @@ class RawEditor extends Component {
     });
   }
 
+  handleCodeHighlightClick = (e) => {
+    let { focus, insertAtomicBlock } = this.props;
+
+    focus();
+    insertAtomicBlock('CODE_HIGHLIGHT', 'IMMUTABLE', {
+      language: 'javascript',
+      lineNumbers: false,
+      lineHighlight: '',
+      value: 'console.log(\'Hello world!\');',
+    });
+  }
+
   handleUploadClick = (e) => {
     let { focus, insertAtomicBlock } = this.props;
     let file = this.fileInput.files[0];
@@ -265,6 +277,10 @@ class RawEditor extends Component {
           <Control
             label="TeX"
             onClick={this.handleBlockTeXClick}
+          />
+          <Control
+            label="Code Highlight"
+            onClick={this.handleCodeHighlightClick}
           />
         </Controls>
         <div className="editor">
