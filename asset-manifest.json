@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.1708f611.css",
-  "main.css.map": "static/css/main.1708f611.css.map",
-  "main.js": "static/js/main.f4b8d9d8.js",
-  "main.js.map": "static/js/main.f4b8d9d8.js.map",
+  "main.css": "static/css/main.5ab2458b.css",
+  "main.css.map": "static/css/main.5ab2458b.css.map",
+  "main.js": "static/js/main.31784e7d.js",
+  "main.js.map": "static/js/main.31784e7d.js.map",
   "static\\media\\KaTeX_AMS-Regular.eot": "static/media/KaTeX_AMS-Regular.672c9619.eot",
   "static\\media\\KaTeX_AMS-Regular.ttf": "static/media/KaTeX_AMS-Regular.9971d270.ttf",
   "static\\media\\KaTeX_AMS-Regular.woff": "static/media/KaTeX_AMS-Regular.e78f217c.woff",
@@ -56,5 +56,6 @@
   "static\\media\\KaTeX_Typewriter-Regular.eot": "static/media/KaTeX_Typewriter-Regular.179ea52c.eot",
   "static\\media\\KaTeX_Typewriter-Regular.ttf": "static/media/KaTeX_Typewriter-Regular.8f16d7f3.ttf",
   "static\\media\\KaTeX_Typewriter-Regular.woff": "static/media/KaTeX_Typewriter-Regular.9bd7cfe5.woff",
-  "static\\media\\KaTeX_Typewriter-Regular.woff2": "static/media/KaTeX_Typewriter-Regular.d2f65c21.woff2"
+  "static\\media\\KaTeX_Typewriter-Regular.woff2": "static/media/KaTeX_Typewriter-Regular.d2f65c21.woff2",
+  "static\\media\\no_image_available.jpg": "static/media/no_image_available.625d1aff.jpg"
 }
