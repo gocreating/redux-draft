@@ -2,10 +2,14 @@
   border: 1px solid black;
   padding: 20px;
 }
-.raw-editor.controls {
-  border-bottom: 1px solid #ddd;
-  padding: 0 0 10px 0;
-  margin-bottom: 10px;
+.raw-editor .controls .title {
+  display: inline-block;
+  width: 100px;
+  padding-right: 10px;
+  margin-right: 10px;
+  border-right: 1px solid blue;
+  text-align: right;
+  color: blue;
 }
 .raw-editor .controls .control {
   display: inline-block;

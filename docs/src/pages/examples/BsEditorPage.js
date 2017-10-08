@@ -4,10 +4,10 @@ import Tabs from 'react-bootstrap/lib/Tabs';
 import Tab from 'react-bootstrap/lib/Tab';
 import { reduxDraft } from '../../../../lib';
 import PageLayout from '../../utils/PageLayout';
-import Preview from '../../Preview';
-import Raw from '../../Raw';
-import BsEditor from '../../editors/BsEditor';
-import bs from '../../presets/bs';
+import Preview from '../../editors/utils/Preview';
+import Raw from '../../editors/utils/Raw';
+import BsEditor from '../../editors/BsEditor/BsEditor';
+import draftConfig from '../../editors/BsEditor/config';
 
 class BsEditorPage extends Component {
   render() {
@@ -30,11 +30,11 @@ class BsEditorPage extends Component {
           </Tab>
           <Tab eventKey={2} title="Preview">
             <br />
-            {React.createElement(reduxDraft(bs)(Preview))}
+            {React.createElement(reduxDraft(draftConfig)(Preview))}
           </Tab>
           <Tab eventKey={3} title="Raw">
             <br />
-            {React.createElement(reduxDraft(bs)(Raw))}
+            {React.createElement(reduxDraft(draftConfig)(Raw))}
           </Tab>
         </Tabs>
       </PageLayout>

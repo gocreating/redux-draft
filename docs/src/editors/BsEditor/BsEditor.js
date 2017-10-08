@@ -1,44 +1,15 @@
 import request from 'superagent';
-import classNames from 'classnames';
 import React, { Component } from 'react';
 import { Editor, RichUtils } from 'draft-js';
 import Col from 'react-bootstrap/lib/Col';
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
-import { reduxDraft } from '../../../lib';
-import bs from '../presets/bs';
-import configs from '../../configs';
+import { reduxDraft } from '../../../../lib';
+import ControlButton from './ControlButton';
+import draftConfig from './config';
+import configs from '../../../configs';
 import 'draft-js/dist/Draft.css';
 import './BsEditor.css';
-
-class ControlButton extends Component {
-  render() {
-    let {
-      label,
-      active,
-      disabled,
-      ...rest
-    } = this.props;
-
-    let cx = classNames(
-      'btn btn-default', {
-        'active': active,
-        'disabled': disabled,
-      }
-    );
-
-    return (
-      <button
-        type="button"
-        className={cx}
-        disabled={disabled}
-        {...rest}
-      >
-        {label}
-      </button>
-    );
-  }
-}
 
 class BsEditor extends Component {
   state = {
@@ -326,4 +297,4 @@ class BsEditor extends Component {
   }
 }
 
-export default reduxDraft(bs)(BsEditor);
+export default reduxDraft(draftConfig)(BsEditor);

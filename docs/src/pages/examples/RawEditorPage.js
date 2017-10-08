@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { reduxDraft } from '../../../../lib';
 import PageLayout from '../../utils/PageLayout';
-import Preview from '../../Preview';
-import Raw from '../../Raw';
-import RawEditor from '../../editors/RawEditor';
-import raw from '../../presets/raw';
+import Preview from '../../editors/utils/Preview';
+import Raw from '../../editors/utils/Raw';
+import RawEditor from '../../editors/RawEditor/RawEditor';
+import draftConfig from '../../editors/RawEditor/config';
 
 class RawEditorPage extends Component {
   render() {
@@ -12,9 +12,9 @@ class RawEditorPage extends Component {
       <PageLayout>
         <RawEditor />
         <h2>Preview</h2>
-        {React.createElement(reduxDraft(raw)(Preview))}
+        {React.createElement(reduxDraft(draftConfig)(Preview))}
         <h2>Raw</h2>
-        {React.createElement(reduxDraft(raw)(Raw))}
+        {React.createElement(reduxDraft(draftConfig)(Raw))}
       </PageLayout>
     );
   }

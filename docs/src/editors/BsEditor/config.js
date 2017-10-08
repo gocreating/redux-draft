@@ -1,12 +1,12 @@
 import React from 'react';
-import BlockAtomic from '../draftComponents/Atomic/BlockAtomic';
-import DecoratorLink from '../draftComponents/Link/DecoratorLink';
-import Link from '../draftComponents/Link/Link';
-import EntityImage from '../draftComponents/Image/EntityImage';
 import Image from 'react-bootstrap/lib/Image';
-import EntityTeX from '../draftComponents/TeX/EntityTeX';
-import TeX from '../draftComponents/TeX/TeX';
-import linkStrategy from '../strategies/link';
+import BlockAtomic from '../../draftComponents/Atomic/BlockAtomic';
+import DecoratorLink from '../../draftComponents/Link/DecoratorLink';
+import Link from '../../draftComponents/Link/Link';
+import EntityImage from '../../draftComponents/Image/EntityImage';
+import EntityTeX from '../../draftComponents/TeX/EntityTeX';
+import TeX from '../../draftComponents/TeX/TeX';
+import linkStrategy from '../../strategies/link';
 
 export default {
   name: 'BS',

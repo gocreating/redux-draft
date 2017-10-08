@@ -1,14 +1,14 @@
 import React from 'react';
-import BlockHeader from '../draftComponents/Header/BlockHeader';
-import Header from '../draftComponents/Header/Header';
-import BlockAtomic from '../draftComponents/Atomic/BlockAtomic';
-import DecoratorLink from '../draftComponents/Link/DecoratorLink';
-import Link from '../draftComponents/Link/Link';
-import EntityImage from '../draftComponents/Image/EntityImage';
-import Image from '../draftComponents/Image/Image';
-import EntityTeX from '../draftComponents/TeX/EntityTeX';
-import TeX from '../draftComponents/TeX/TeX';
-import linkStrategy from '../strategies/link';
+import BlockHeader from '../../draftComponents/Header/BlockHeader';
+import Header from '../../draftComponents/Header/Header';
+import BlockAtomic from '../../draftComponents/Atomic/BlockAtomic';
+import DecoratorLink from '../../draftComponents/Link/DecoratorLink';
+import Link from '../../draftComponents/Link/Link';
+import EntityImage from '../../draftComponents/Image/EntityImage';
+import Image from '../../draftComponents/Image/Image';
+import EntityTeX from '../../draftComponents/TeX/EntityTeX';
+import TeX from '../../draftComponents/TeX/TeX';
+import linkStrategy from '../../strategies/link';
 
 export default {
   name: 'RAW',

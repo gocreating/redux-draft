@@ -1,11 +1,11 @@
 import request from 'superagent';
 import React, { Component } from 'react';
 import { Editor, RichUtils } from 'draft-js';
-import { reduxDraft } from '../../../lib';
-import Controls from '../Controls';
-import Control from '../Control';
-import raw from '../presets/raw';
-import configs from '../../configs';
+import { reduxDraft } from '../../../../lib';
+import Controls from '../utils/Controls';
+import Control from '../utils/Control';
+import draftConfig from './config';
+import configs from '../../../configs';
 import 'draft-js/dist/Draft.css';
 import './RawEditor.css';
 
@@ -137,7 +137,7 @@ class RawEditor extends Component {
 
     return (
       <div className="raw-editor">
-        <Controls>
+        <Controls title="Default Block">
           <Control
             label="Normal"
             active={activeMap['unstyled']}
@@ -194,7 +194,7 @@ class RawEditor extends Component {
             onClick={this.toggleBlock('ordered-list-item')}
           />
         </Controls>
-        <Controls>
+        <Controls title="Custom Block">
           <Control
             label="Header 1"
             active={activeMap.HEADER_LEVEL_1}
@@ -206,7 +206,7 @@ class RawEditor extends Component {
             onClick={this.toggleBlock('HEADER_LEVEL_2')}
           />
         </Controls>
-        <Controls>
+        <Controls title="Default Style">
           <Control
             label="Bold"
             active={activeMap.BOLD}
@@ -233,7 +233,7 @@ class RawEditor extends Component {
             onClick={this.toggleStyle('CODE')}
           />
         </Controls>
-        <Controls>
+        <Controls title="Custom Style">
           <Control
             label="Red"
             active={activeMap.COLOR_RED}
@@ -245,7 +245,7 @@ class RawEditor extends Component {
             onClick={this.toggleStyle('CUSTOM_CODE')}
           />
         </Controls>
-        <Controls>
+        <Controls title="Decorator">
           <Control
             label={
               activeMap.LINK && !isCollapsed ?
@@ -257,7 +257,7 @@ class RawEditor extends Component {
             onClick={this.handleLinkClick}
           />
         </Controls>
-        <Controls>
+        <Controls title="Entity">
           <Control
             label="Image"
             onClick={this.handleImageClick}
@@ -301,4 +301,4 @@ class RawEditor extends Component {
   }
 }
 
-export default reduxDraft(raw)(RawEditor);
+export default reduxDraft(draftConfig)(RawEditor);
