@@ -93,6 +93,7 @@ let editorReducer = (state = initialEditorState, action) => {
       let {
         customStyleMap,
         customBlockMap,
+        entityMap,
         decoratorMap,
         renderMap,
       } = config;
@@ -118,6 +119,7 @@ let editorReducer = (state = initialEditorState, action) => {
       let blockNames = (
         blockRenderMap.keySeq().toArray()
       );
+      let entityNames = Object.keys(entityMap);
       let decoratorNames = Object.keys(decoratorMap);
       let decorators = (
         decoratorNames.map(decoratorName => decoratorMap[decoratorName])
@@ -138,6 +140,7 @@ let editorReducer = (state = initialEditorState, action) => {
         styleNames,
         defaultBlockNames,
         blockNames,
+        entityNames,
         decoratorNames,
         decorators,
         activeMap: getActiveMap({

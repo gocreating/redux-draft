@@ -105,6 +105,7 @@ class Preview extends Component {
       customStyleMap,
       blockNames,
       styleNames,
+      entityNames,
       decoratorNames,
       renderMap,
     } = this.props;
@@ -145,9 +146,12 @@ class Preview extends Component {
         return map;
       }, {}
     );
-    let entityRenderer = decoratorNames.reduce(
-      (map, decoratorName) => {
-        map[decoratorName] = mergedRenderMap[decoratorName];
+    let entityRenderer = [
+      ...entityNames,
+      ...decoratorNames,
+    ].reduce(
+      (map, entityName) => {
+        map[entityName] = mergedRenderMap[entityName];
         return map;
       }, {}
     );
