@@ -75,16 +75,6 @@ class RawEditor extends Component {
   }
 
   handleImageClick = (e) => {
-    let { focus, insertEntity } = this.props;
-    let src = prompt('src');
-
-    focus();
-    if (src) {
-      insertEntity('IMAGE', 'IMMUTABLE', { src });
-    }
-  }
-
-  handleBlockImageClick = (e) => {
     let { focus, insertAtomicBlock } = this.props;
     let src = prompt('src');
 
@@ -266,16 +256,11 @@ class RawEditor extends Component {
             active={activeMap.LINK}
             onClick={this.handleLinkClick}
           />
-          <Control
-            label="Inline Image"
-            active={activeMap.IMAGE}
-            onClick={this.handleImageClick}
-          />
         </Controls>
         <Controls>
           <Control
-            label="Block Image"
-            onClick={this.handleBlockImageClick}
+            label="Image"
+            onClick={this.handleImageClick}
           />
           <Control
             label="TeX"
