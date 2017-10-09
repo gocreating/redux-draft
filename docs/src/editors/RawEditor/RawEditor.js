@@ -1,6 +1,12 @@
 import request from 'superagent';
 import React, { Component } from 'react';
-import { Editor, RichUtils } from 'draft-js';
+import {
+  Editor,
+  EditorState,
+  Modifier,
+  RichUtils,
+  getDefaultKeyBinding,
+} from 'draft-js';
 import { reduxDraft } from '../../../../lib';
 import Controls from '../utils/Controls';
 import Control from '../utils/Control';
@@ -14,6 +20,10 @@ class RawEditor extends Component {
     isFileUploading: false,
   }
 
+  keyBindingFn = (e) => {
+    return getDefaultKeyBinding(e);
+  }
+
   handleKeyCommand = (command, editorState) => {
     let newState = RichUtils.handleKeyCommand(editorState, command);
 
@@ -22,6 +32,45 @@ class RawEditor extends Component {
       return true;
     }
     return false;
+  }
+
+  // https://github.com/jpuri/draftjs-utils/issues/2
+  handleReturn = ({ shiftKey }) => {
+    let {
+      editorState,
+      updateEditorState,
+      applyBlock,
+    } = this.props;
+    let selectionState = editorState.getSelection();
+    let contentState = editorState.getCurrentContent();
+    let currentBlock = contentState
+      .getBlockForKey(selectionState.getStartKey());
+    let blockLength = currentBlock.getLength();
+    let startOffset = selectionState.getStartOffset();
+    let blockType = RichUtils.getCurrentBlockType(editorState);
+
+    if (shiftKey && blockType === 'code-block') {
+      let newEditorState = RichUtils.insertSoftNewline(editorState);
+
+      updateEditorState(newEditorState);
+      return 'handled';
+    }
+    if (blockLength === startOffset) {
+      let splitBlock = Modifier.splitBlock(
+        editorState.getCurrentContent(),
+        editorState.getSelection()
+      );
+      let newEditorState = EditorState.push(
+        editorState,
+        splitBlock,
+        'split-block'
+      );
+
+      updateEditorState(newEditorState);
+      applyBlock('unstyled');
+      return 'handled';
+    }
+    return 'not-handled';
   }
 
   applyBlock = (blockName) => (e) => {
@@ -288,7 +337,9 @@ class RawEditor extends Component {
             ref={setRef}
             editorState={editorState}
             onChange={updateEditorState}
+            keyBindingFn={this.keyBindingFn}
             handleKeyCommand={this.handleKeyCommand}
+            handleReturn={this.handleReturn}
             blockRenderMap={blockRenderMap}
             blockRendererFn={blockRendererFn}
             customStyleMap={customStyleMap}
