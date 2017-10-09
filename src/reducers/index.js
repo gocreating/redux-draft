@@ -499,13 +499,16 @@ let editorReducer = (state = initialEditorState, action) => {
     }
 
     case UPDATE_ENTITY_DATA: {
-      let { editorState } = state;
+      let { editorState, decorators } = state;
       let contentState = editorState.getCurrentContent();
       contentState = contentState.mergeEntityData(
         action.entityKey,
         action.data
       );
-      editorState = EditorState.createWithContent(contentState);
+      editorState = EditorState.createWithContent(
+        contentState,
+        new CompositeDecorator(decorators)
+      );
 
       return {
         ...state,
