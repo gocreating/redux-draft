@@ -1,6 +1,8 @@
 import React from 'react';
 import BlockParagraph from '../../draftComponents/Paragraph/BlockParagraph';
 import Paragraph from '../../draftComponents/Paragraph/Paragraph';
+import BlockQuote from '../../draftComponents/Quote/BlockQuote';
+import Quote from '../../draftComponents/Quote/Quote';
 import BlockHeader from '../../draftComponents/Header/BlockHeader';
 import Header from '../../draftComponents/Header/Header';
 import BlockAtomic from '../../draftComponents/Atomic/BlockAtomic';
@@ -20,6 +22,10 @@ export default {
   customBlockMap: {
     unstyled: {
       component: BlockParagraph,
+      editable: true,
+    },
+    blockquote: {
+      component: BlockQuote,
       editable: true,
     },
     HEADER_LEVEL_1: {
@@ -156,6 +162,13 @@ export default {
         <Paragraph>
           {child}
         </Paragraph>
+      ))
+    ),
+    blockquote: (children) => (
+      children.map(child => (
+        <Quote>
+          {child}
+        </Quote>
       ))
     ),
     HEADER_LEVEL_1: (children) => children.map(child =>

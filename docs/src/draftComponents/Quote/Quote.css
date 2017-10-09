@@ -1,0 +1,33 @@
+@import url(//fonts.googleapis.com/earlyaccess/cwtexming.css);
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+
+.quote {
+  position: relative;
+  margin: 20px 0;
+  padding: 30px 60px;
+  font-family: 'Open Sans', 'cwTeXMing', serif;
+  font-size: 1.25em;
+  line-height: 1.6em;
+  background: #f9f9f9;
+  color: #444;
+}
+.quote:before,
+.quote:after {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 4em;
+  line-height: 1;
+  color: #ccc;
+}
+.quote:before {
+  top: 0;
+  left: 0;
+  content: "\201C";
+}
+.quote:after {
+  bottom: 0;
+  right: 0;
+  content: "\201D";
+}
