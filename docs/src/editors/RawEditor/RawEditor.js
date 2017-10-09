@@ -56,7 +56,11 @@ class RawEditor extends Component {
       updateEditorState(newEditorState);
       return 'handled';
     }
-    if (blockLength === startOffset) {
+    if (
+      blockLength === startOffset &&
+      blockType !== 'unordered-list-item' &&
+      blockType !== 'ordered-list-item'
+    ) {
       let splitBlock = Modifier.splitBlock(
         editorState.getCurrentContent(),
         editorState.getSelection()
