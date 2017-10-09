@@ -348,6 +348,19 @@ class RawEditor extends Component {
             onClick={this.handleCodeHighlightClick}
           />
         </Controls>
+        <Controls title="Upload Image">
+          <input
+            ref={ref => { this.fileInput = ref; }}
+            type="file"
+          />
+          <button
+            type="button"
+            disabled={isFileUploading}
+            onClick={this.handleUploadClick}
+          >
+            {isFileUploading ? 'Uploading...' : 'Upload'}
+          </button>
+        </Controls>
         <Controls title="Load Example">
           <Control
             label="DOCUMENTATION"
@@ -376,22 +389,6 @@ class RawEditor extends Component {
             readOnly={readOnly}
             placeholder="write something..."
           />
-        </div>
-        <div>
-          <form>
-            <legend>Upload Block Image:</legend>
-            <input
-              ref={ref => { this.fileInput = ref; }}
-              type="file"
-            />
-            <button
-              type="button"
-              disabled={isFileUploading}
-              onClick={this.handleUploadClick}
-            >
-              {isFileUploading ? 'Uploading...' : 'Upload'}
-            </button>
-          </form>
         </div>
       </div>
     );
