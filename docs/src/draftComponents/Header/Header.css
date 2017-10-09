@@ -1,8 +1,14 @@
+@import url(//fonts.googleapis.com/earlyaccess/cwtexyen.css);
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+
 .header-level-1 {
-  font-size: 64px;
-  border-bottom: 1px solid #ccc;
+  font-size: 48px;
+  color: #066;
+  margin: 25px 0 15px 0;
+  font-family: 'Open Sans', 'cwTeXYen', sans-serif;
 }
 .header-level-2 {
-  font-size: 48px;
+  font-size: 2.5em;
   border-bottom: 1px solid #ccc;
+  font-family: 'Open Sans', 'cwTeXYen', sans-serif;
 }
