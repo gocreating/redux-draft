@@ -93,11 +93,11 @@ let editorReducer = (state = initialEditorState, action) => {
     case INIT: {
       let { config } = action;
       let {
-        customStyleMap,
-        customBlockMap,
-        entityMap,
-        decoratorMap,
-        renderMap,
+        customStyleMap = {},
+        customBlockMap = {},
+        entityMap = {},
+        decoratorMap = {},
+        renderMap = {},
       } = config;
       let defaultStyleNames = Object.keys(DefaultDraftInlineStyle);
       let styleNames = [
