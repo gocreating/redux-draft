@@ -12,6 +12,7 @@ import Controls from '../utils/Controls';
 import Control from '../utils/Control';
 import draftConfig from './config';
 import configs from '../../../configs';
+import * as examples from '../../examples/index';
 import 'draft-js/dist/Draft.css';
 import './RawEditor.css';
 
@@ -181,6 +182,12 @@ class RawEditor extends Component {
       });
   }
 
+  loadExample = (exampleName) => () => {
+    let { updateEditorStateFromRaw } = this.props;
+
+    updateEditorStateFromRaw(examples[exampleName]);
+  }
+
   render() {
     let {
       setRef,
@@ -335,6 +342,16 @@ class RawEditor extends Component {
           <Control
             label="Code Highlight"
             onClick={this.handleCodeHighlightClick}
+          />
+        </Controls>
+        <Controls title="Load Example">
+          <Control
+            label="Poem"
+            onClick={this.loadExample('poem')}
+          />
+          <Control
+            label="部落格"
+            onClick={this.loadExample('chineseBlog')}
           />
         </Controls>
         <div className="editor">
