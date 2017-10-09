@@ -8,11 +8,13 @@ import {
   Modifier,
   AtomicBlockUtils,
   SelectionState,
+  convertFromRaw,
 } from 'draft-js';
 import {
   INIT,
   SET_REF,
   UPDATE_EDITOR_STATE,
+  UPDATE_EDITOR_STATE_FROM_RAW,
   UPDATE_READ_ONLY,
   TOGGLE_BLOCK,
   TOGGLE_STYLE,
@@ -174,6 +176,32 @@ let editorReducer = (state = initialEditorState, action) => {
         decoratorNames,
       } = state;
       let { editorState } = action;
+
+      return {
+        ...state,
+        editorState,
+        activeMap: getActiveMap({
+          editorState,
+          blockNames,
+          styleNames,
+          decoratorNames,
+        }),
+      };
+    }
+
+    case UPDATE_EDITOR_STATE_FROM_RAW: {
+      let {
+        blockNames,
+        styleNames,
+        decoratorNames,
+        decorators,
+      } = state;
+      let { rawContent } = action;
+      let contentState = convertFromRaw(rawContent);
+      let editorState = EditorState.createWithContent(
+        contentState,
+        new CompositeDecorator(decorators)
+      );
 
       return {
         ...state,

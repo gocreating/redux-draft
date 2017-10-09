@@ -2,6 +2,7 @@ import {
   INIT,
   SET_REF,
   UPDATE_EDITOR_STATE,
+  UPDATE_EDITOR_STATE_FROM_RAW,
   UPDATE_READ_ONLY,
   TOGGLE_BLOCK,
   TOGGLE_STYLE,
@@ -35,6 +36,14 @@ export let updateEditorState = (editorName, editorState) => {
     type: UPDATE_EDITOR_STATE,
     editorName,
     editorState,
+  };
+};
+
+export let updateEditorStateFromRaw = (editorName, rawContent) => {
+  return {
+    type: UPDATE_EDITOR_STATE_FROM_RAW,
+    editorName,
+    rawContent,
   };
 };
 
