@@ -21,6 +21,11 @@ let App = () => (
       />
       <Route
         exact
+        path="/examples/blank-editor"
+        component={require('./pages/examples/BlankEditorPage').default}
+      />
+      <Route
+        exact
         path="/examples/bs-editor"
         component={require('./pages/examples/BsEditorPage').default}
       />
