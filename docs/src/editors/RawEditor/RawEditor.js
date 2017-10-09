@@ -266,6 +266,11 @@ class RawEditor extends Component {
             active={activeMap.HEADER_LEVEL_2}
             onClick={this.toggleBlock('HEADER_LEVEL_2')}
           />
+          <Control
+            label="Header 3"
+            active={activeMap.HEADER_LEVEL_3}
+            onClick={this.toggleBlock('HEADER_LEVEL_3')}
+          />
         </Controls>
         <Controls title="Default Style">
           <Control

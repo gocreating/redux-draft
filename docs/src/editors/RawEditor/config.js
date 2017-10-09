@@ -32,6 +32,11 @@ export default {
       props: { level: 2 },
       editable: true,
     },
+    HEADER_LEVEL_3: {
+      component: BlockHeader,
+      props: { level: 3 },
+      editable: true,
+    },
     atomic: {
       component: BlockAtomic,
       props: {
@@ -160,6 +165,11 @@ export default {
     ),
     HEADER_LEVEL_2: (children) => children.map(child =>
       <Header level={2}>
+        {child}
+      </Header>
+    ),
+    HEADER_LEVEL_3: (children) => children.map(child =>
+      <Header level={3}>
         {child}
       </Header>
     ),
