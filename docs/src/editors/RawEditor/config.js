@@ -1,4 +1,6 @@
 import React from 'react';
+import BlockParagraph from '../../draftComponents/Paragraph/BlockParagraph';
+import Paragraph from '../../draftComponents/Paragraph/Paragraph';
 import BlockHeader from '../../draftComponents/Header/BlockHeader';
 import Header from '../../draftComponents/Header/Header';
 import BlockAtomic from '../../draftComponents/Atomic/BlockAtomic';
@@ -16,6 +18,10 @@ import linkStrategy from '../../strategies/link';
 export default {
   name: 'RAW',
   customBlockMap: {
+    unstyled: {
+      component: BlockParagraph,
+      editable: true,
+    },
     HEADER_LEVEL_1: {
       component: BlockHeader,
       props: { level: 1 },
@@ -140,6 +146,13 @@ export default {
     //       <li key={keys[idx]}>{child}</li>)}
     //   </ol>
     // ),
+    unstyled: (children) => (
+      children.map(child => (
+        <Paragraph>
+          {child}
+        </Paragraph>
+      ))
+    ),
     HEADER_LEVEL_1: (children) => children.map(child =>
       <Header level={1}>
         {child}

@@ -1,9 +1,11 @@
 import React from 'react';
-import Image from 'react-bootstrap/lib/Image';
+import BlockParagraph from '../../draftComponents/Paragraph/BlockParagraph';
+import Paragraph from '../../draftComponents/Paragraph/Paragraph';
 import BlockAtomic from '../../draftComponents/Atomic/BlockAtomic';
 import DecoratorLink from '../../draftComponents/Link/DecoratorLink';
 import Link from '../../draftComponents/Link/Link';
 import EntityImage from '../../draftComponents/Image/EntityImage';
+import Image from 'react-bootstrap/lib/Image';
 import EntityTeX from '../../draftComponents/TeX/EntityTeX';
 import TeX from '../../draftComponents/TeX/TeX';
 import EntityCodeHighlight
@@ -14,6 +16,10 @@ import linkStrategy from '../../strategies/link';
 export default {
   name: 'BS',
   customBlockMap: {
+    unstyled: {
+      component: BlockParagraph,
+      editable: true,
+    },
     atomic: {
       component: BlockAtomic,
       props: {
@@ -47,6 +53,13 @@ export default {
     },
   },
   renderMap: {
+    unstyled: (children) => (
+      children.map(child => (
+        <Paragraph>
+          {child}
+        </Paragraph>
+      ))
+    ),
     LINK: (children, data, { key }) => (
       <Link
         key={key}

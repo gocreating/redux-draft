@@ -1,0 +1,9 @@
+@import url(//fonts.googleapis.com/earlyaccess/cwtexming.css);
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+
+.paragraph {
+  margin: 20px 0;
+  font-size: 1.25em;
+  line-height: 1.6em;
+  font-family: 'Open Sans', 'cwTeXMing', serif;
+}
