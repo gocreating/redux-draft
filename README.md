@@ -1,6 +1,10 @@
 # Redux Draft
 
-[Demo](https://gocreating.github.io/redux-draft/)
+Manage draftjs with redux and utility actions.
+
+## Demo & Documentation
+
+[Try It Now](https://gocreating.github.io/redux-draft/)
 
 ## Development
 
