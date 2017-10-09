@@ -346,6 +346,10 @@ class RawEditor extends Component {
         </Controls>
         <Controls title="Load Example">
           <Control
+            label="DOCUMENTATION"
+            onClick={this.loadExample('documentation')}
+          />
+          <Control
             label="Poem"
             onClick={this.loadExample('poem')}
           />
