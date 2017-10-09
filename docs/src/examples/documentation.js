@@ -22,7 +22,7 @@ export default {
         "language": "javascript",
         "lineNumbers": true,
         "lineHighlight": "",
-        "value": "import React, { Component } from 'react';\nimport { reduxDraft } from 'redux-draft';\nimport { Editor } from 'draft-js';\n\nclass MyEditor extends Component {\n  render() {\n    let {\n      setRef,\n      editorState,\n      updateEditorState,\n    } = this.props;\n\n    return (\n      <Editor\n        ref={setRef}\n        editorState={editorState}\n        onChange={updateEditorState}\n        placeholder=\"write something...\"\n      />\n    );\n  }\n}\n\nexport default reduxDraft({\n  name: 'MY_EDITOR',\n})(RawEditor);"
+        "value": "import React, { Component } from 'react';\nimport { reduxDraft } from 'redux-draft';\nimport { Editor } from 'draft-js';\nimport 'draft-js/dist/Draft.css';\n\nclass MyEditor extends Component {\n  render() {\n    let {\n      setRef,\n      editorState,\n      updateEditorState,\n    } = this.props;\n\n    return (\n      <Editor\n        ref={setRef}\n        editorState={editorState}\n        onChange={updateEditorState}\n        placeholder=\"write something...\"\n      />\n    );\n  }\n}\n\nexport default reduxDraft({\n  name: 'MY_EDITOR',\n})(RawEditor);"
       }
     },
     "3": {
