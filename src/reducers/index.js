@@ -93,6 +93,7 @@ let editorReducer = (state = initialEditorState, action) => {
     case INIT: {
       let { config, markInitialized } = action;
       let {
+        rawContent,
         customStyleMap = {},
         customBlockMap = {},
         entityMap = {},
@@ -107,9 +108,17 @@ let editorReducer = (state = initialEditorState, action) => {
       let defaultBlockNames = (
         DefaultDraftBlockRenderMap.keySeq().toArray()
       );
+      let editorStateFromRaw = null;
+
+      if (rawContent) {
+        editorStateFromRaw = EditorState.createWithContent(
+          convertFromRaw(rawContent)
+        );
+      }
 
       let editorState = (
         action.editorState ||
+        editorStateFromRaw ||
         EditorState.createEmpty()
       );
       let blockRenderMap = getBlockRenderMap(customBlockMap);
