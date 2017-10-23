@@ -15,11 +15,12 @@ import {
   UPDATE_ENTITY_DATA,
 } from '../constants/ActionTypes';
 
-export let init = (editorName, config) => {
+export let init = (editorName, config, markInitialized = true) => {
   return {
     type: INIT,
     editorName,
     config,
+    markInitialized,
   };
 };
 

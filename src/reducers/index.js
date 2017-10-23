@@ -91,7 +91,7 @@ let initialEditorState = {};
 let editorReducer = (state = initialEditorState, action) => {
   switch (action.type) {
     case INIT: {
-      let { config } = action;
+      let { config, markInitialized } = action;
       let {
         customStyleMap = {},
         customBlockMap = {},
@@ -133,7 +133,7 @@ let editorReducer = (state = initialEditorState, action) => {
       return {
         // private redux-draft props
         _instance: null,
-        _initialized: true,
+        _initialized: markInitialized,
 
         // public redux-draft props
         name: action.editorName,
