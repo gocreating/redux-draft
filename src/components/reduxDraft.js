@@ -6,8 +6,10 @@ import * as actionCreators from '../actions/index';
 
 export default (config) => (WrappedComponent) => {
   class ReduxDraft extends Component {
-    componentDidMount() {
-      let { _initialized, init } = this.props;
+    constructor(props) {
+      super(props);
+
+      let { _initialized, init } = props;
 
       if (!_initialized) {
         init(config);
